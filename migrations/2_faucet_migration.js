@@ -1,4 +1,4 @@
-
+// succesfully deployed!
 
 const FaucetContract = artifacts.require("Faucet")
 
