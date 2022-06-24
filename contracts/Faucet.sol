@@ -5,6 +5,9 @@ contract Faucet {
 
     address[] public funders;
 
+    // private -> can be accessible only within the smart contract
+    // internal -> can be accessible within smart contract and also derived smart contract
+
     receive() external payable {}
 
     function addFunds() external payable {
