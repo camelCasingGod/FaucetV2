@@ -28,4 +28,10 @@ contract Faucet {
         return funders[index];
     }
 
+    // const instance = await Faucet.deployed()
+    
+    // instance.addFunds({value: "2000", from: accounts[0]})
+    // instance.addFunds({value: "2000", from: accounts[1]})
+
+    // instance.getAllFunders()
 }
