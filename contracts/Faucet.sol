@@ -4,6 +4,8 @@ pragma solidity >=0.4.22 <0.9.0;
 contract Faucet {
 
     uint public numOfFunders;
+    address public owner;
+
     mapping(address => bool) private funders;
     mapping(uint => address) private lutFunders;
 
@@ -13,6 +15,18 @@ contract Faucet {
             "Cannot withdraw more than 1 ether"
         );
         _; // function body is executed next
+    }
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        require(
+            msg.sender == owner,
+            "Only owner can call this function"
+        );
+        _;
     }
 
     receive() external payable {}
@@ -27,11 +41,11 @@ contract Faucet {
         }
     }
 
-    function admin1() external {
+    function admin1() external onlyOwner {
         // some managing stuff that only admin should have access to
     }
 
-    function admin2() external {
+    function admin2() external onlyOwner {
         // some managing stuff that only admin should have access to
     }
 
