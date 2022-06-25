@@ -44,5 +44,6 @@ contract Faucet {
 
     // instance.getAllFunders()
     // instance.getFunderAtIndex(0)
-    // instance.withdraw(500000000000000000)
+    
+    // instance.withdraw("500000000000000000", {from: accounts[1]})
 }
