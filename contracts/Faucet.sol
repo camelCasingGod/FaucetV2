@@ -31,6 +31,10 @@ contract Faucet {
 
     receive() external payable {}
 
+    function transferOwnership(address newOwner) external onlyOwner {
+        owner = newOwner;
+    }
+
     function addFunds() external payable {
         address funder = msg.sender;
 
