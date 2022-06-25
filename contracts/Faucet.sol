@@ -19,6 +19,12 @@ contract Faucet {
         }
     }
 
+    function withdraw(uint amount) external {
+        if (amount < 1000000000000000000) {
+            payable(msg.sender).transfer(amount);
+        }
+    }
+
     function getAllFunders() external view returns (address[] memory) {
         address[] memory _funders = new address[](numOfFunders);
         for (uint8 n = 0; n < numOfFunders; n++) {
@@ -33,8 +39,10 @@ contract Faucet {
 
     // const instance = await Faucet.deployed()
     
-    // instance.addFunds({value: "2000", from: accounts[0]})
-    // instance.addFunds({value: "2000", from: accounts[1]})
+    // instance.addFunds({value: "2000000000000000000", from: accounts[0]})
+    // instance.addFunds({value: "2000000000000000000", from: accounts[1]})
 
     // instance.getAllFunders()
+    // instance.getFunderAtIndex(0)
+    // instance.withdraw(500000000000000000)
 }
