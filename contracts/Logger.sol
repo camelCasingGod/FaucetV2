@@ -14,8 +14,13 @@ abstract contract Logger { // kind of like interface in java
 
     function emitLog() public virtual returns(bytes32);
 
-    function test3() external pure returns (uint) {
+    function test3() internal pure returns (uint) {
         return 100;
+    }
+
+    function test5() external pure returns (uint) {
+        test3();
+        return 10;
     }
 
 }
