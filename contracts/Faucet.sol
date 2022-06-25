@@ -13,9 +13,9 @@ contract Faucet {
         address funder = msg.sender;
 
         if (!funders[funder]) {
-            numOfFunders++;
+            uint index = numOfFunders++;
             funders[funder] = true;
-            lutFunders[numOfFunders] = funder;
+            lutFunders[index] = funder;
         }
     }
 
