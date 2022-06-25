@@ -20,9 +20,8 @@ contract Faucet {
     }
 
     function withdraw(uint amount) external {
-        if (amount < 1000000000000000000) {
-            payable(msg.sender).transfer(amount);
-        }
+        require(amount <= 1000000000000000000, "Cannot withdraw more than 1 ether");
+        payable(msg.sender).transfer(amount);
     }
 
     function getAllFunders() external view returns (address[] memory) {
@@ -44,6 +43,6 @@ contract Faucet {
 
     // instance.getAllFunders()
     // instance.getFunderAtIndex(0)
-    
+
     // instance.withdraw("500000000000000000", {from: accounts[1]})
 }
