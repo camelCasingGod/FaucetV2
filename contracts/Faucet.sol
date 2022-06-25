@@ -2,8 +2,9 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "./Owned.sol";
+import "./Logger.sol";
 
-contract Faucet is Owned {
+contract Faucet is Owned, Logger {
 
     uint public numOfFunders;
 
@@ -16,6 +17,10 @@ contract Faucet is Owned {
             "Cannot withdraw more than 1 ether"
         );
         _; // function body is executed next
+    }
+
+    function emitLog() public pure override returns(bytes32) {
+        return "Hello, World!"; 
     }
 
     constructor() {
