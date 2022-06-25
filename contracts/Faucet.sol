@@ -5,6 +5,7 @@ contract Faucet {
 
     uint public numOfFunders;
     mapping(address => bool) private funders;
+    mapping(uint => address) private lutFunders;
 
     receive() external payable {}
 
@@ -14,20 +15,21 @@ contract Faucet {
         if (!funders[funder]) {
             numOfFunders++;
             funders[funder] = true;
+            lutFunders[numOfFunders] = funder;
         }
     }
 
-    // function getAllFunders() external view returns (address[] memory) {
-    //     address[] memory _funders = new address[](numOfFunders);
-    //     for (uint8 n = 0; n < numOfFunders; n++) {
-    //         _funders[n] = funders[n];
-    //     }
-    //     return _funders;
-    // }
+    function getAllFunders() external view returns (address[] memory) {
+        address[] memory _funders = new address[](numOfFunders);
+        for (uint8 n = 0; n < numOfFunders; n++) {
+            _funders[n] = lutFunders[n];
+        }
+        return _funders;
+    }
 
-    // function getFunderAtIndex(uint8 index) external view returns (address) {
-    //     return funders[index];
-    // }
+    function getFunderAtIndex(uint8 index) external view returns (address) {
+        return lutFunders[index];
+    }
 
     // const instance = await Faucet.deployed()
     
