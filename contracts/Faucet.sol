@@ -27,6 +27,14 @@ contract Faucet {
         }
     }
 
+    function admin1() external {
+        // some managing stuff that only admin should have access to
+    }
+
+    function admin2() external {
+        // some managing stuff that only admin should have access to
+    }
+
     function withdraw(uint amount) external limitWithdraw(amount) {
         payable(msg.sender).transfer(amount);
     }
