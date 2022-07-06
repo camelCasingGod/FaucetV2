@@ -15,8 +15,6 @@ function App() {
   useEffect(() => {
     const loadProvider = async () => {
 
-      debugger
-
       let provider = null;
       // with metamask we have an access to window.ethereum & to window.web3
       // metamask injexts a global API into website
@@ -49,18 +47,24 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const getAccounts = async () => {
-      const accounts = await web3Api.web3.ethereum.getAccounts()
+    const getAccount = async () => {
+      const accounts = await web3Api.web3.eth.getAccounts()
       setAccount(accounts[0])
     }
 
-    getAccounts()
-  }, [])
+    web3Api.web3 && getAccount()
+  }, [web3Api.web3])
 
   return (
     <>
       <div className="faucet-wrapper">
         <div className="faucet">
+          <span>
+            <strong>Account: </strong>
+          </span>
+          <h1>
+            { account ? account : "not connected" }
+          </h1>
           <div className="balance-view is-size-2">
             Current Balance: <strong>10</strong> ETH
           </div>
