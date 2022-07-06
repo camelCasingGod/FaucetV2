@@ -10,16 +10,18 @@ function App() {
     web3: null
   })
 
+  const [account, setAccount] = useState(null)
+
   useEffect(() => {
     const loadProvider = async () => {
+
+      debugger
+
+      let provider = null;
       // with metamask we have an access to window.ethereum & to window.web3
       // metamask injexts a global API into website
       // this API allows websites to request users, accounts, read data to blockchain,
       // sign messages and transactions
-
-      console.log(window.web3)
-      console.log(window.ethereum)
-      let provider = null;
 
       if (window.ethereum) {
         provider = window.ethereum;
@@ -46,7 +48,14 @@ function App() {
     loadProvider()
   }, [])
 
-  console.log(web3Api.web3)
+  useEffect(() => {
+    const getAccounts = async () => {
+      const accounts = await web3Api.web3.ethereum.getAccounts()
+      setAccount(accounts[0])
+    }
+
+    getAccounts()
+  }, [])
 
   return (
     <>
