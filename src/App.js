@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import Web3 from "web3";
 import detectEthereumProvider from '@metamask/detect-provider'
 import { loadContract } from './utils/load-contract';
-import contract from '@truffle/contract';
 
 function App() {
 
@@ -17,7 +16,7 @@ function App() {
   const [account, setAccount] = useState(null)
   const [shouldReload, reload] = useState(false)
 
-  const reloadEffect = () => reload(!shouldReload)
+  const reloadEffect = useCallback(() => reload(!shouldReload), [shouldReload])
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -66,7 +65,16 @@ function App() {
     })
 
     reloadEffect()
-  }, [web3Api, account])
+  }, [web3Api, account, reloadEffect])
+
+  const withdrawFunds = async () => {
+    const { contract, web3 } = web3Api
+    const withdrawAmount = web3.utils.toWei("0.5", "ether")
+    await contract.withdraw(withdrawAmount, {
+      from: account,
+    })
+    reloadEffect()
+  }
 
   return (
     <>
@@ -95,7 +103,10 @@ function App() {
             className='button is-primary is-light mr-2'
             onClick={addFunds}
           >Donate 1eth</button>
-          <button className='button is-link is-light'>Withdraw</button>
+          <button
+            className='button is-link is-light'
+            onClick={withdrawFunds}
+          >Withdraw 0.1eth</button>
         </div>
       </div>
     </>
